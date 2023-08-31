@@ -24,9 +24,6 @@ A small lexical compiler for a new "Programming Language"
 |OPEN_BLOCK     |  init          |
 |CLOSE_BLOCK   |  end       |
 |LOGICAL_OPERATOR     |  and, or, not          |
-|MULTIPLICATION_OPERATOR     |  *         |
-|EQUALITY_OPERATOR     | =           |
-|RELATIONAL_OPERATOR   |  == != > < >= <=          |
 
 
 ## Prerequisites
