@@ -46,8 +46,9 @@ export class Tokenizer {
     }
 
     const string = this._string.slice(this._cursorIndex);
-    console.log('string ->', string);
-    console.log('_cursorIndex ->', this._cursorIndex);
+    const linesBefore = this._string
+      .substring(0, this._cursorIndex)
+      .split('\n');
 
     for (const [regexp, tokenType] of spec) {
       const tokenValue = this._getMatch(regexp, string);
@@ -66,7 +67,9 @@ export class Tokenizer {
       };
     }
 
-    throw new Error(`Unexpected token: "${string[0]}"`);
+    const [tokenError] = string;
+    const lineNumber = linesBefore.length;
+    throw new Error(`Unexpected token: "${tokenError}" at line ${lineNumber}`);
   }
 
   /**
