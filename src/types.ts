@@ -27,7 +27,9 @@ export const reservedKeywordsTokenTypes = [
   'constructor',
   'init',
   'end',
-  'new'
+  'new',
+  'from',
+  'import'
 ] as const;
 
 export const literalTokenTypes = [
@@ -44,7 +46,8 @@ const symbolTokenTypes = [
   'OPEN_CURLY_BRACKET',
   'CLOSE_CURLY_BRACKET',
   'OPEN_PAREN',
-  'CLOSE_PAREN'
+  'CLOSE_PAREN',
+  'POINT'
 ] as const;
 
 export const assignTokenTypes = ['SIMPLE_ASSIGN', 'COMPLEX_ASSIGN'] as const;
@@ -65,9 +68,12 @@ export const blockKeywordsTokenTypes = ['OPEN_BLOCK', 'CLOSE_BLOCK'] as const;
 const logicalTokenTypes = ['LOGICAL_OPERATOR'] as const;
 const keywordsTokenTypes = ['RESERVED_KEYWORD'] as const;
 const dataTypesTokenTypes = ['DATA_TYPE'] as const;
+const keywordsImportation = ['IMPORT_MODULES'] as const;
 
 export const tokenTypes = [
   'IDENTIFIER',
+  ...keywordsImportation,
+  ...reservedKeywordsTokenTypes,
   ...assignTokenTypes,
   ...keywordsTokenTypes,
   ...literalTokenTypes,
@@ -88,4 +94,5 @@ export type LocalTokenOperator = (typeof logicalTokenTypes)[number];
 export type Token = {
   type: TokenType;
   value: string;
+  line?: number;
 };

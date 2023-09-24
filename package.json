@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./src/example.ts",
+    "dev": "ts-node ./src/main.ts",
     "dev-watch": "npx nodemon  ./src/index.ts",
     "lint": "eslint src --ext js,ts",
     "test": "jest"

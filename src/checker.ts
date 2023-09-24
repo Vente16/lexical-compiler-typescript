@@ -11,6 +11,8 @@ export class Tokenizer {
   private _string = '';
   public _currentLine = 1;
   public _numberOfLines = 0;
+  private _previousToken: Token | null = null;
+  public _lines_splitted: string[] = [];
   /**
    * Initializes the string.
    * @param string String to tokenize.
@@ -20,6 +22,7 @@ export class Tokenizer {
     this._cursorIndex = 0;
     this._string = string;
     this._numberOfLines = lines.length;
+    this._lines_splitted = lines;
   }
 
   /**
@@ -61,10 +64,15 @@ export class Tokenizer {
         return this.getNextToken();
       }
 
-      return {
+      const newToken: Token = {
         type: tokenType,
-        value: tokenValue
+        value: tokenValue,
+        line: linesBefore.length
       };
+
+      this._previousToken = newToken;
+
+      return newToken;
     }
 
     const [tokenError] = string;
@@ -84,5 +92,26 @@ export class Tokenizer {
    */
   public isEOF(): boolean {
     return this._cursorIndex === this._string.length;
+  }
+
+  /**
+   * Get the previous token.
+   */
+  public getPreviousToken(): Token | null {
+    return this._previousToken;
+  }
+
+  public peekNextToken(): Token | null {
+    const string = this._string.slice(this._cursorIndex);
+    for (const [regexp, _] of spec) {
+      const match = regexp.exec(string);
+      if (match) {
+        return {
+          type: match[0] as Token['type'],
+          value: match[0]
+        };
+      }
+    }
+    return null;
   }
 }

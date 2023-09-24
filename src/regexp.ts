@@ -13,15 +13,6 @@ export const spec: [RegExp, TokenType | null][] = [
   [/^\/{2}.*/, null], // Skip single-line comments
   [/^\/\*[\s\S]*?\*\//, null], // Skip multi-line comments
 
-  // ———————————————— Symbols, delimiters —————————————————
-  //  init, end, (, )
-
-  [/^init/, 'OPEN_BLOCK'],
-  [/^end/, 'CLOSE_BLOCK'],
-  [/^\(/, 'OPEN_PAREN'],
-  [/^\)/, 'CLOSE_PAREN'],
-  [/^,/, 'COMMA'],
-
   // ————————————————— Equality operators —————————————————
   // ==, !=, !==
 
@@ -40,6 +31,7 @@ export const spec: [RegExp, TokenType | null][] = [
   [/^[-]/, 'SUBTRACTION_OPERATOR'],
   [/^[/]/, 'DIVISION_OPERATOR'],
   [/^[*]/, 'MULTIPLICATION_OPERATOR'],
+  [/^[.]/, 'POINT'],
 
   // ———————————————— Relational operators ————————————————
   // <, <=, >, >=
@@ -79,14 +71,19 @@ export const spec: [RegExp, TokenType | null][] = [
   [/^\binterface\b/, 'RESERVED_KEYWORD'],
   [/^\bglobal\b/, 'RESERVED_KEYWORD'],
   [/^\bconstructor\b/, 'RESERVED_KEYWORD'],
-  [/^\binit\b/, 'RESERVED_KEYWORD'],
-  [/^\bend\b/, 'RESERVED_KEYWORD'],
   [/^\bnew\b/, 'RESERVED_KEYWORD'],
+  [/^\bimport\b/, 'RESERVED_KEYWORD'],
+  //[/^\bfrom\b/, 'RESERVED_KEYWORD'],
+  //[/^\bimport\b/, 'IMPORT_MODULES'],
+  //[/^\bfrom\b/, 'IMPORT_MODULES'],
 
+  [/^\bfrom\b/, 'from'],
+  [/^\bimport\b/, 'import'],
   // —————————————————————— Booleans ——————————————————————
   // false, true
 
   [/^(true|false)/, 'bol'],
+  [/^\bbol\b/, 'DATA_TYPE'],
 
   // —————————————————————— Numbers ———————————————————————
   // 0, 1, 3, 1337
@@ -120,7 +117,17 @@ export const spec: [RegExp, TokenType | null][] = [
   [/^\band\b/, 'LOGICAL_OPERATOR'],
   [/^\bor\b/, 'LOGICAL_OPERATOR'],
   [/^\bnot\b/, 'LOGICAL_OPERATOR'],
+
+  // ———————————————— Symbols, delimiters —————————————————
+  //  init, end, (, )
+
+  [/^init/, 'OPEN_BLOCK'],
+  [/^end/, 'CLOSE_BLOCK'],
+  [/^\(/, 'OPEN_PAREN'],
+  [/^\)/, 'CLOSE_PAREN'],
+  [/^,/, 'COMMA'],
+
   // ———————————————————— Identifiers —————————————————————
   // j, name, age
-  [/^\b\w+\b/, 'IDENTIFIER']
+  [/^[a-zA-Z_]\w*/, 'IDENTIFIER']
 ];
