@@ -67,7 +67,7 @@ export class Parser {
           type: 'VARIABLE_DECLARATION',
           dataType,
           identifier,
-          value: this.currentToken!.value
+          value: this.currentToken?.value
         } as VariableDeclaration;
       }
 

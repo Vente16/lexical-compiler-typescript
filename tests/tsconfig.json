@@ -3,7 +3,7 @@
   "references": [
     {
       "name": "ts-eslint-jest-setup",
-      "path": ".."
+      "path": "./../"
     }
   ],
   "compilerOptions": {

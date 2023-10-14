@@ -18,6 +18,7 @@ export class SyntaxAnalyzer {
   private tokenizer: Tokenizer;
   private currentToken: Token | null;
   private expectedInitLine: number | null = null;
+  private code = '';
 
   //private previousToken: Token | null;
   private blockSize: Block = {
@@ -26,9 +27,11 @@ export class SyntaxAnalyzer {
   };
   private declaredVariables: Set<string> = new Set<string>();
 
-  constructor(tokenizer: Tokenizer) {
+  constructor(tokenizer: Tokenizer, code = '') {
     this.tokenizer = tokenizer;
     this.currentToken = this.tokenizer.getNextToken();
+    this.code = code;
+    //this.currentToken = this.allTokens[0];
     //this.previousToken = this.tokenizer.getPreviousToken();
   }
 
@@ -40,6 +43,20 @@ export class SyntaxAnalyzer {
     return this.declaredVariables.has(identifier);
   }
 
+  public getTokens(): Nullable<Token>[] {
+    const lexerForTokens = new Tokenizer(this.code); // Create a new instance
+    const tokens: Nullable<Token>[] = [];
+
+    let nextToken: Nullable<Token> = lexerForTokens.getNextToken();
+
+    while (nextToken) {
+      tokens.push(nextToken);
+      nextToken = lexerForTokens.getNextToken();
+    }
+
+    return tokens;
+  }
+
   public parse(): ParseNode {
     const programNode: ParseNode = {
       type: 'Program',
@@ -47,6 +64,7 @@ export class SyntaxAnalyzer {
     };
 
     while (this.currentToken) {
+      //this.tokens.push(this.currentToken);
       switch (this.currentToken.type) {
         case 'char':
         case 'string':
@@ -81,16 +99,16 @@ export class SyntaxAnalyzer {
           break;
         case 'OPEN_PAREN':
           this.currentToken = this.tokenizer.getNextToken();
-          continue;
+          break;
         case 'POINT':
           this.currentToken = this.tokenizer.getNextToken();
-          continue;
+          break;
         case 'CLOSE_PAREN':
           this.currentToken = this.tokenizer.getNextToken();
-          continue;
+          break;
         case 'RESERVED_KEYWORD':
           this.currentToken = this.tokenizer.getNextToken();
-          continue;
+          break;
         case 'IDENTIFIER':
           if (!this.isVariableDeclared(this.currentToken.value)) {
             throw new Error(
@@ -98,7 +116,7 @@ export class SyntaxAnalyzer {
             );
           }
           this.currentToken = this.tokenizer.getNextToken();
-          continue;
+          break;
 
         case 'EQUALITY_OPERATOR':
           programNode.children.push(this.parseExpression());
@@ -114,6 +132,11 @@ export class SyntaxAnalyzer {
           );
       }
     }
+
+    if (this.blockSize.init > this.blockSize.end) {
+      throw new Error(`Mismatched init and end blocks`);
+    }
+    console.log('this.blockSize', this.blockSize);
 
     return programNode;
   }

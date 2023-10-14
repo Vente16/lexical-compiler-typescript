@@ -1,12 +1,16 @@
 {
-  "name": "ts-eslint-jest-setup",
+  "name": "typescript-compiler",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node ./src/main.ts",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "dev:compiler": "ts-node ./src/main.ts",
     "dev-watch": "npx nodemon  ./src/index.ts",
     "lint": "eslint src --ext js,ts",
     "test": "jest"
@@ -16,13 +20,28 @@
     "@babel/preset-typescript": "^7.13.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^20.5.7",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "autoprefixer": "^10.4.16",
     "eslint": "^7.27.0",
     "jest": "^26.6.3",
     "nodemon": "^3.0.1",
+    "postcss": "^8.4.30",
     "prettier": "^3.0.2",
+    "tailwindcss": "^3.3.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "vite": "^4.4.9"
+  },
+  "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.1",
+    "@types/codemirror": "^5.60.10",
+    "@uiw/react-codemirror": "^4.21.18",
+    "codemirror": "^6.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
