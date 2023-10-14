@@ -1,6 +1,9 @@
-# Lexical compiler
+# Syntax compiler
 
 A small lexical compiler for a new "Programming Language" 
+
+### DEMO
+![Demo](demo.gif)
 
 ## Token Specification 
 
@@ -31,10 +34,10 @@ A small lexical compiler for a new "Programming Language"
 - Install [ Node js](https://nodejs.dev/en/) > v16.20.0 
 - Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) as global
 
-
 ## Setting up
 
 Install node dependencies
+
 ```shell
  yarn install
 ```
@@ -42,6 +45,7 @@ Install node dependencies
 ## Running the project
 
 Run the following command
+
 ```shell
  yarn dev
 ```
