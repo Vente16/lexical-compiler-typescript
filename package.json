@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "dev:compiler": "ts-node ./src/main.ts",
+    "dev:compiler": "ts-node ./src/semantic.ts",
     "dev-watch": "npx nodemon  ./src/index.ts",
     "lint": "eslint src --ext js,ts",
     "test": "jest"
@@ -21,6 +21,7 @@
     "@types/jest": "^26.0.23",
     "@types/node": "^20.5.7",
     "@types/react": "^18.2.22",
+    "@types/react-copy-to-clipboard": "^5.0.5",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.25.0",
@@ -42,6 +43,7 @@
     "@uiw/react-codemirror": "^4.21.18",
     "codemirror": "^6.0.1",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0"
   }
 }

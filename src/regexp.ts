@@ -32,6 +32,14 @@ export const spec: [RegExp, TokenType | null][] = [
   [/^[/]/, 'DIVISION_OPERATOR'],
   [/^[*]/, 'MULTIPLICATION_OPERATOR'],
   [/^[.]/, 'POINT'],
+  /*
+  [/^[+]/, 'ARITHMETIC_OPERATOR'],
+  [/^[-]/, 'ARITHMETIC_OPERATOR'],
+  [/^[/]/, 'ARITHMETIC_OPERATOR'],
+  [/^[*]/, 'ARITHMETIC_OPERATOR'],
+
+  [/^[+]/, 'CONCATENATION_OPERATOR'],
+  [/^(-?\d+)(?=\s|\)|;|$)/, 'int'] */
 
   // ———————————————— Relational operators ————————————————
   // <, <=, >, >=
@@ -76,6 +84,9 @@ export const spec: [RegExp, TokenType | null][] = [
   //[/^\bfrom\b/, 'RESERVED_KEYWORD'],
   //[/^\bimport\b/, 'IMPORT_MODULES'],
   //[/^\bfrom\b/, 'IMPORT_MODULES'],
+  //[/^\bfrom\b/, 'IMPORT_MODULES'],
+
+  //[/^\bfrom\b/, 'IMPORT_MODULES'],  
 
   [/^\bfrom\b/, 'from'],
   [/^\bimport\b/, 'import'],

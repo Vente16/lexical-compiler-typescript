@@ -26,6 +26,7 @@ export class SyntaxAnalyzer {
     end: 0
   };
   private declaredVariables: Set<string> = new Set<string>();
+  public declaredVariablesVal: { [variableName: string]: unknown } = {};
 
   constructor(tokenizer: Tokenizer, code = '') {
     this.tokenizer = tokenizer;
@@ -35,8 +36,9 @@ export class SyntaxAnalyzer {
     //this.previousToken = this.tokenizer.getPreviousToken();
   }
 
-  private declareVariable(identifier: string) {
+  private declareVariable(identifier: string, value: unknown = '') {
     this.declaredVariables.add(identifier);
+    this.declaredVariablesVal[identifier] = value;
   }
 
   private isVariableDeclared(identifier: string): boolean {
@@ -126,7 +128,16 @@ export class SyntaxAnalyzer {
           programNode.children.push(this.parseIfStatement());
           break;
 
+        case 'ADDITION_OPERATOR':
+        case 'SUBTRACTION_OPERATOR':
+        case 'DIVISION_OPERATOR':
+        case 'MULTIPLICATION_OPERATOR':
+        case 'RELATIONAL_OPERATOR':
+          this.currentToken = this.tokenizer.getNextToken();
+          break;
+
         default:
+          console.log('this', this.currentToken);
           throw new Error(
             `Unexpected token at line ${this.currentToken?.line}`
           );
@@ -257,7 +268,8 @@ export class SyntaxAnalyzer {
                 `Variable '${identifierToken.value}' is declared as '${declaredDataType}', but the assigned value is invalid at line ${assignmentToken?.line}`
               );
             }
-
+            
+            this.declaredVariablesVal[identifierToken.value] =  this.currentToken.value;
             variableDeclarationNode.children.push(assignmentToken);
             variableDeclarationNode.children.push(expressionNode);
           }

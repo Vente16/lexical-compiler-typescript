@@ -58,7 +58,10 @@ const operatorTokenTypes = [
   'DIVISION_OPERATOR',
   'MULTIPLICATION_OPERATOR',
   'EQUALITY_OPERATOR',
-  'RELATIONAL_OPERATOR'
+  'RELATIONAL_OPERATOR',
+  'COMPARISON_OPERATOR',
+  'ARITHMETIC_OPERATOR',
+  'CONCATENATION_OPERATOR'
 ] as const;
 
 export const blockKeywordsTokenTypes = ['OPEN_BLOCK', 'CLOSE_BLOCK'] as const;
@@ -69,6 +72,8 @@ const logicalTokenTypes = ['LOGICAL_OPERATOR'] as const;
 const keywordsTokenTypes = ['RESERVED_KEYWORD'] as const;
 const dataTypesTokenTypes = ['DATA_TYPE'] as const;
 const keywordsImportation = ['IMPORT_MODULES'] as const;
+const keywordsFunction = ['func'] as const;
+
 
 export const tokenTypes = [
   'IDENTIFIER',
@@ -82,7 +87,8 @@ export const tokenTypes = [
   ...keywordsTokenTypes,
   ...blockKeywordsTokenTypes,
   ...logicalTokenTypes,
-  ...dataTypesTokenTypes
+  ...dataTypesTokenTypes,
+  ...keywordsFunction,
 ] as const;
 
 export type AssignmentTokenType = (typeof assignTokenTypes)[number];
